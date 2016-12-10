@@ -40,23 +40,55 @@ def print_footer(names)
 end
 
 def input_students
-  puts "Please enter the names of the students"
-  puts "To finish, just hit return twice"
-  # create an empty array
-  students = []
-  # get the first name
+
+   students = []
+
+  puts "Press 'any key' then enter to input student details or 'Enter' to exit"
+
   name = gets.chomp
-  # while the name is not empty, repeat this code
+
   while !name.empty? do
-    # add the student hash to the array
-    students << {name: name, cohort: :november}
-    puts "Now we have #{students.count} students"
-    # get another name from the user
-    name = gets.chomp
-  end
-  # return the array of students
-  students
-end
+   puts "Please enter name: "
+   name = gets.chomp.capitalize
+   puts "Please enter cohort: "
+   cohort = gets.chomp.capitalize
+   puts "Please enter hobbies: "
+   hobbies = gets.chomp.capitalize
+   puts "\nPlease enter country of birth: "
+   country_of_birth = gets.chomp.capitalize
+   puts "\nPlease enter height in inches: "
+   height = gets.chomp.capitalize
+
+   #add the student to the array
+   students << {name: name, cohort: cohort, hobbies: hobbies, country_of_birth: country_of_birth, heighth: height}
+     puts "Now we have #{students.count} students"
+     puts "Press 'any key' and 'Enter' to add another student or 'Enter' to exit"
+   name = gets.chomp
+   end
+     students
+
+ end
+
+ def print(students)
+
+   # while loop to return student names
+   count = students.count
+   while count > 0 do
+   students.each.with_index(1) do |student, index|
+    puts "#{index} #{student[:name]} (#{student[:cohort]} cohort)"
+   count -= 1
+   end
+   end
+ end
+
+ def print_header
+   puts "The students of Villians Academy"
+   puts "______________"
+ end
+
+ def print_footer(students)
+  puts "Overall, we have #{students.count} great students"
+ end
 #nothing happens until we call the methods
 students = input_students
 print_header
