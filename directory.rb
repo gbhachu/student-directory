@@ -1,22 +1,10 @@
 
 # let's put all students into an array
-students = [
-  {name: "Dr. Hannibal Lecter", cohort: :november},
-  {name: "Darth Vader", cohort: :november},
-  {name: "Nurse Ratched", cohort: :november},
-  {name: "Michael Corleone", cohort: :november},
-  {name: "Alex DeLarge", cohort: :november},
-  {name: "The Wicked Witch of the West", cohort: :november},
-  {name: "Terminator", cohort: :november},
-  {name: "Freddy Krueger", cohort: :november},
-  {name: "The Joker", cohort: :november},
-  {name: "Joffrey Baratheon", cohort: :november},
-  {name: "Norman Bates", cohort: :november}
-]
+students = []
 
 
 
-
+months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]
 
 def print(students)
    students.each.with_index(1) do |student, index|
@@ -32,6 +20,8 @@ def input_students
 
    students = []
 
+   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]
+
   puts "Press 'any key' then enter to input student details or 'Enter' to exit"
 
   name = gets.chomp
@@ -39,8 +29,19 @@ def input_students
   while !name.empty? do
    puts "Please enter name: "
    name = gets.chomp.capitalize
+
+   # Checks if cohort is correct
+    cohort_month = false
+  while  cohort_month == false
    puts "Please enter cohort: "
    cohort = gets.chomp.capitalize
+     if !months.include? cohort
+       puts "Invalid entry please re-enter cohort"
+     else
+       cohort_month = true
+    end
+  end
+
    puts "Please enter hobbies: "
    hobbies = gets.chomp.capitalize
    puts "\nPlease enter country of birth: "
