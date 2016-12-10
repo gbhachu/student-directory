@@ -21,7 +21,7 @@ end
 
 def print(students)
 
-   # 3. returns student's name if less than 12 characters
+   # 3. returns student's name if less than 12 characs
    students.select! { |student| student[:name].length < 12}
 
    students.each.with_index(1) do |student, index|
