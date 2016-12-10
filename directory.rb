@@ -13,30 +13,19 @@ students = [
   {name: "Joffrey Baratheon", cohort: :november},
   {name: "Norman Bates", cohort: :november}
 ]
-# and then print them
-def print_header
-  puts "The students of Villains Academy"
-  puts "-------------"
-end
 
-def print(students)
 
-   # 3. returns student's name if less than 12 characs
-   students.select! { |student| student[:name].length < 12}
 
-   students.each.with_index(1) do |student, index|
-     puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
-   end
- end
+
 
 def print(students)
    students.each.with_index(1) do |student, index|
-    puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
+    puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)".center(60)
   end
 end
 
 def print_footer(names)
-  puts "Overall, we have #{names.count} great students"
+  puts "Overall, we have #{names.count} great students".center(60)
 end
 
 def input_students
@@ -61,8 +50,8 @@ def input_students
 
    #add the student to the array
    students << {name: name, cohort: cohort, hobbies: hobbies, country_of_birth: country_of_birth, heighth: height}
-     puts "Now we have #{students.count} students"
-     puts "Press 'any key' and 'Enter' to add another student or 'Enter' to exit"
+     puts "Now we have #{students.count} students".center(60)
+     puts "Press 'any key' and 'Enter' to add another student or 'Enter' to exit".center(60)
    name = gets.chomp
    end
      students
@@ -75,19 +64,19 @@ def input_students
    count = students.count
    while count > 0 do
    students.each.with_index(1) do |student, index|
-    puts "#{index} #{student[:name]} (#{student[:cohort]} cohort)"
+    puts "#{index} #{student[:name]} (#{student[:cohort]} cohort)".center(60)
    count -= 1
    end
    end
  end
-
+# print header to screen
  def print_header
-   puts "The students of Villians Academy"
-   puts "______________"
+   puts "The students of Villians Academy".center(60)
+   puts "______________".center(60)
  end
-
+# print number of students to screen
  def print_footer(students)
-  puts "Overall, we have #{students.count} great students"
+  puts "Overall, we have #{students.count} great students".center(60)
  end
 #nothing happens until we call the methods
 students = input_students
