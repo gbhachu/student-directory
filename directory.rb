@@ -19,12 +19,12 @@ def print_header
   puts "-------------"
 end
 
-def print(students, letter)
+def print(students)
 
-   # 2. adding 2nd arguement to get student's name tht begin with a specific letter
-   students.select! { |student| student[:name][0] == letter}
+   # 3. returns student's name if less than 12 characters
+   students.select! { |student| student[:name].length < 12}
 
-  students.each.with_index(1) do |student, index|
+   students.each.with_index(1) do |student, index|
      puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
    end
  end
