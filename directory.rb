@@ -1,11 +1,12 @@
 @Months =["january","febuary","march","april","may","june","july","august","september","october","november","december"]
+name = gets.chomp
+puts "Hit Enter Twice to continue!".center(60)
 
 def get_user_input
    properties = {}
 
-
    puts "Please enter the name of the student:"
-   properties[:name] = gets.slice(0..-2)
+   properties[:name] = gets.slice(0..-2) # alternative to gets.chomp
 
 
   cohort = false
