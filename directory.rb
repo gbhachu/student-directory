@@ -1,81 +1,104 @@
+@Months =["january","febuary","march","april","may","june","july","august","september","october","november","december"]
 
-# let's put all students into an array
-students = []
+def get_user_input
+   properties = {}
 
 
+   puts "Please enter the name of the student:"
+   properties[:name] = gets.slice(0..-2)
 
-months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]
 
-def print(students)
-
-months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]
-
-student_sort = students.sort_by { |student| months.index student[:cohort]}
-
-student_sort.each.with_index(1) do |x, index|
-puts "#{index} #{x[:first_name]} #{x[:surname]} (#{x[:cohort]} cohort)".center(60)
+  cohort = false
+  while  cohort == false
+   puts "Please enter cohort: "
+   cohort = gets.chomp.downcase
+  if !@Months.include? cohort
+      puts "Invalid entry please re-enter cohort:"
+    else
+      cohort = true
+    end
   end
-end
+  properties[:cohort] = gets.chomp
 
-def print_footer(names)
-  puts "Overall, we have #{names.count} great students".center(60)
-end
+   puts "Please enter the country of birth of the student, to finish, hit enter twice:"
 
-def input_students
+   properties[:country] = gets.chomp
 
 
-puts "Please enter the names of the students."
-puts "To finish just hit return twice."
-  students = []
-  name = gets.chomp
-  name = name.to_sym
-  while !name.empty? do
-    puts "Please enter the cohort of the student."
-    cohort = gets.chomp
-    cohorts = ["January","February","March","April","May","June","July","August","September","October","November","December"]
-      if cohort.empty?
-        cohort = :no_input
-      else
-        while !cohorts.any? { |month| cohort.include? month}
-        puts "There are typos in your entry. Could you type the cohort in again please?"
-        cohort = gets.chomp
-        end
-      cohort = cohort.to_sym
-      end
-    students << {name: name, cohort: cohort}
-    puts "Now we have #{students.count} students!"
-    puts "Please enter next student."
-    name = gets.chomp
-    name = name.to_sym
-  end
-  if name.empty?
-    name = :no_name
-  end
-    puts "Now we have #{students.count} students!"
-    students
-end
- def print(students)
+   properties[:cohort] == '' ? properties[:cohort] = ':cohort' : properties[:cohort] = properties[:cohort]
+   properties[:country] == '' ? properties[:country] = ':country' : properties[:country] = properties[:country]
 
-   # while loop to return student names
-   count = students.count
-   while count > 0 do
-   students.each.with_index(1) do |student, index|
-    puts "#{index} #{student[:name]} (#{student[:cohort]} cohort)".center(60)
-   count -= 1
-   end
-   end
+   return properties
  end
-# print header to screen
+
+ def input_students
+   students = []
+   properties = get_user_input()
+   grouped = {}
+
+   index = 0
+   while !properties[:name].empty? do
+     students << properties
+
+     if (!grouped[students[index][:cohort]])
+       grouped[students[index][:cohort]] = [].push(students[index])
+     else
+       grouped[students[index][:cohort]].push(students[index])
+     end
+     puts "-----------".center(60)
+     # (students.count == 1) ? puts "Now we have #{students.count} student" : puts "Now we have #{students.count} students"
+
+     if students.count == 1 && grouped.count == 1
+       puts "We have #{students.count} student".center(60)
+       puts "We have #{grouped.count} group".center(60)
+     else
+       puts "We have #{students.count} students".center(60)
+       puts "We have #{grouped.count} groups".center(60)
+     end
+
+     puts "-----------".center(60)
+
+     properties = get_user_input()
+     index += 1
+   end
+   return students
+ end
+
+
  def print_header
-   puts "The students of Villians Academy".center(60)
-   puts "______________".center(60)
+   puts "The students of Villains Academy are:".center(60)
  end
-# print number of students to screen
- def print_footer(students)
-  puts "Overall, we have #{students.count} great students".center(60)
+
+
+ def print(students)
+   index = 0
+   if students.length > 0
+     while students.length > index
+       student = students[index]
+       puts "#{student[:name]}; #{student[:cohort]}; #{student[:country]}".center(60)
+       index += 1
+     end
+   else
+     puts 'Please make sure to enter the name of the student'
+   end
+
  end
-#nothing happens until we call the methods
-students = input_students
-print_header
-print(students)
-print_footer(students)
+
+
+ def print_footer(names)
+   if names.count == 1
+     puts "Overall, we have #{names.count} great student"
+  else
+   puts "Overall, we have #{names.count} great students"
+ end
+ end
+
+ # Assign the result from input_students to names
+ names = input_students
+
+ #nothing happens until we call the methods
+ print_header()
+ puts "------------".center(60)
+ print(names)
+ puts "------------".center(60)
+ print_footer(names)
